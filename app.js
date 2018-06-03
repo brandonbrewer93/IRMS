@@ -6,7 +6,8 @@ const express    = require("express"),
       config     = require("./config");
 
 // Routes
-const userRoutes = require("./routes/users");
+const userRoutes = require("./routes/users"),
+      index      = require("./routes/index.js");
 
 mongoose.Promise = global.Promise;
 
@@ -18,6 +19,7 @@ mongoose.connect(config.connectionString, {
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
+app.use("/", index);
 app.use("/users", userRoutes);
 
 app.listen(3000, function(){
