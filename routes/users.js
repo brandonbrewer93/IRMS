@@ -2,7 +2,7 @@ const express = require("express"),
       router  = express.Router(),
       User    = require("../models/user");
 
-router.get("/", function(req, res){
+router.get("/new", function(req, res){
   res.render("../views/users/new.ejs");
 });
 
