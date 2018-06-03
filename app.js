@@ -2,13 +2,14 @@ const express = require("express"),
       app     = express(),
       mongoose = require("mongoose"),
       bodyParser = require("body-parser"),
-      User     = require("./models/user");
+      User     = require("./models/user"),
+      config   = require("./config");
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://ds139970.mlab.com:39970/irms', {
-    user: "**********",
-    pass: "**********"
+mongoose.connect(config.connectionString, {
+    user: config.username,
+    pass: config.password
 })
 
 app.use(bodyParser.urlencoded({extended: true}));
