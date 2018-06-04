@@ -9,11 +9,11 @@ router.get("/", function(req, res){
         } else {
             res.render("../views/users/index", {users: allUsers});
         }
-    })
+    });
 });
 
 router.get("/new", function(req, res){
-  res.render("../views/users/new.ejs");
+  res.render("../views/users/new");
 });
 
 router.post("/", function(req, res){
