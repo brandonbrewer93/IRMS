@@ -2,13 +2,19 @@ const express = require("express"),
       router  = express.Router(),
       User    = require("../models/user");
 
+router.get("/", function(req, res){
+    User.find({}, function(err, allUsers){
+        if(err){
+            console.log(err)
+        } else {
+            res.render("../views/users/index", {users: allUsers});
+        }
+    })
+});
+
 router.get("/new", function(req, res){
   res.render("../views/users/new.ejs");
 });
-
-router.get("/edit", function(req, res){
-    res.render("../views/users/edit.ejs")
-})
 
 router.post("/", function(req, res){
   let firstName    = req.body.firstName,
@@ -29,6 +35,10 @@ router.post("/", function(req, res){
           res.redirect("/");
       }
   });
+});
+
+router.get("/edit", function(req, res){
+    res.render("../views/users/edit.ejs")
 })
 
 module.exports = router;

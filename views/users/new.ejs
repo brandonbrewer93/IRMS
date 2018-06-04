@@ -1,10 +1,23 @@
 <% include ../partials/header %>
 
-        <form action="/users" method="POST">
-            <input type="text" name="firstName" placeholder="First Name">
-            <input type="text" name="lastName" placeholder="Last Name">
-            <input type="text" name="organization" placeholder="Organization">
-            <input type="submit">
+        <form action="/users" method="POST" class="form-group">
+            <div class="row">
+                <div class="col">
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" placeholder="First Name" class="form-control">
+                </div>
+                <div class="col">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" name="lastName" placeholder="Last Name" class="form-control">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <label for="organization">Organization</label>
+                    <input type="text" name="organization" placeholder="Organization" class="form-control">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Register</button>
         </form>
 
 <% include ../partials/footer %>

@@ -1,0 +1,9 @@
+<% include ../partials/header %>
+
+    <% users.forEach(function(user){ %>
+      <ul class="list-group">
+        <li class="list-group-item"><%= user.firstName + " " + user.lastName %></li>
+      </ul>
+    <% }) %> 
+
+<% include ../partials/footer %>
