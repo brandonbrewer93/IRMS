@@ -7,9 +7,10 @@ const express    = require("express"),
       config     = require("./config");
 
 // Routes
-const userRoutes   = require("./routes/users"),
-      reportRoutes = require("./routes/reports"),
-      index        = require("./routes/index.js");
+const organizationRoutes = require("./routes/organizations"),
+      userRoutes         = require("./routes/users"),
+      reportRoutes       = require("./routes/reports"),
+      index              = require("./routes/index.js");
 
 mongoose.Promise = global.Promise;
 
@@ -24,6 +25,7 @@ app.set("view engine", "ejs");
 app.use("/", index);
 app.use("/users", userRoutes);
 app.use("/reports", reportRoutes);
+app.use("/organizations", organizationRoutes);
 
 app.listen(3000, function(){
     console.log("IRMS server running on port 3000...")
