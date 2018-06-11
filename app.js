@@ -2,9 +2,16 @@ const express    = require("express"),
       app        = express(),
       mongoose   = require("mongoose"),
       bodyParser = require("body-parser"),
-      User       = require("./models/user"),
-      Report     = require("./models/report"),
       config     = require("./config");
+
+// Passport 
+const passport      = require("passport"),
+      LocalStrategy = require("passport-local");
+
+// Models
+const User         = require("./models/user"),
+      Report       = require("./models/report"),
+      Organization = require("./models/organization");
 
 // Routes
 const organizationRoutes = require("./routes/organizations"),
@@ -21,6 +28,18 @@ mongoose.connect(config.connectionString, {
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+
+// PASSPORT CONFIGURATION
+app.use(require("express-session")({
+    secret: "Secret password",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser())
 
 app.use("/", index);
 app.use("/users", userRoutes);
