@@ -25,15 +25,19 @@ router.post("/", function(req, res){
   const newReport = {
     description: description,
     address : address,
-    type : type
+    type : type,
+    author: {
+      id: req.user._id,
+      name: req.user.firstName + " " + req.user.lastName
+    }
   };
 
-  Report.create(newReport, function(err){
+  Report.create(newReport, function(err, createdReport){
     if(err){
-      console.log(err);
+      console.log("ERROR");
     } else {
       console.log("Successfully created new report..");
-      res.redirect("/reports");
+      res.redirect("/reports/" + createdReport._id);
     }
   })
 });
@@ -41,7 +45,7 @@ router.post("/", function(req, res){
 router.get("/:id", function(req, res){
   Report.findById(req.params.id).exec(function(err, foundReport){
     if(err){
-      console.log(err);
+      console.log("err");
     } else {
       res.render("reports/show", {report: foundReport});
     }

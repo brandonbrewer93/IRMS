@@ -2,6 +2,11 @@
 
 <div class="jumbotron">
   <h1 class="display-4">IRMS</h1>
+  <% if(!currentUser){ %>
+    <p>Welcome!</p>
+  <% } else { %>
+      <p><%= currentUser.username %></p>
+  <% } %>
   <p class="lead">Incident Report Management System</p>
   <hr class="my-4">
   <a class="btn btn-primary btn-lg" href="/users/new" role="button">Register</a>
