@@ -52,4 +52,31 @@ router.get("/:id", function(req, res){
   });
 });
 
+router.get("/:id/edit", function(req, res){
+  Report.findById(req.params.id, function(err, foundReport){
+    res.render("reports/edit", {report: foundReport});
+  });
+});
+
+router.put("/:id", function(req, res){
+  Report.findByIdAndUpdate(req.params.id, req.body, function(err, updatedReport){
+      if (!err) {
+          console.log(req.body);
+          res.redirect("/reports/" + req.params.id);
+      } else {
+          console.log(err);
+      }
+  });
+});
+
+router.delete("/:id", function(req, res){
+    Report.findByIdAndRemove(req.params.id, function(err){
+        if (!err) {
+            res.redirect("/reports");
+        } else {
+            console.log(err);
+        }
+    });
+});
+
 module.exports = router;

@@ -1,8 +1,9 @@
-const express    = require("express"),
-      app        = express(),
-      mongoose   = require("mongoose"),
-      bodyParser = require("body-parser"),
-      config     = require("./config");
+const express        = require("express"),
+      app            = express(),
+      mongoose       = require("mongoose"),
+      bodyParser     = require("body-parser"),
+      config         = require("./config"),
+      methodOverride = require("method-override");
 
 // Passport 
 const passport      = require("passport"),
@@ -28,6 +29,7 @@ mongoose.connect(config.connectionString, {
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+app.use(methodOverride("_method"));
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
