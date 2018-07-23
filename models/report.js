@@ -5,13 +5,9 @@ const reportSchema = new mongoose.Schema({
   address: String,
   description: String,
   organization: {
-    id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Organization"
     },
-    name: String,
-    type: String
-  },
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,

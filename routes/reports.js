@@ -4,8 +4,8 @@ const express = require("express"),
 
 
 router.get("/", function(req, res){
-  let org = req.user.organization.name;
-  Report.find({ "organization.name" : org }, function(err, allReports){
+  let orgId = req.user.organization._id;
+  Report.find({ "organization" : orgId }, function(err, allReports){
     if(err){
       console.log(err);
     } else {
@@ -19,7 +19,7 @@ router.get("/new", function(req, res){
 });
 
 router.post("/", function(req, res){
-  console.log(req.user);
+  console.log(req.body);
   let description = req.body.description,
       address = req.body.address,
       type    = req.body.type;
@@ -28,10 +28,7 @@ router.post("/", function(req, res){
     description: description,
     address: address,
     type: type,
-    organization: {
-        name: req.user.organization.name,
-        type: req.user.organization.type
-    },
+    organization: req.user.organization,
     author: {
       id: req.user._id,
       name: req.user.firstName + " " + req.user.lastName

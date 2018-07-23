@@ -26,7 +26,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(config.connectionString, {
     user: config.username,
     pass: config.password
-})
+});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
