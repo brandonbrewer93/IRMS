@@ -5,11 +5,16 @@
   <% if(!currentUser){ %>
     <p>Welcome!</p>
   <% } else { %>
-      <p><%= currentUser.username %></p>
+      <p>Welcome, <%= currentUser.username %></p>
   <% } %>
   <p class="lead">Incident Report Management System</p>
   <hr class="my-4">
-  <a class="btn btn-primary btn-lg" href="/users/new" role="button">Register</a>
+  <% if(!currentUser){ %>
+    <a class="btn btn-primary btn-lg" href="/users/new" role="button">Register</a>
+  <% } else { %>
+    <a class="btn btn-primary btn-lg" href="/reports/new" role="button">New Report</a>
+    <a class="btn btn-primary btn-lg" href="/reports" role="button">All Reports</a>
+  <% } %>
 </div>
 
 

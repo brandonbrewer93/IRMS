@@ -1,0 +1,16 @@
+GET http://localhost:3000/organizations
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-06-25T074339.200.html
+
+###
+
+GET http://localhost:3000/organizarions
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-06-25T074328.404.html
+
+###
+

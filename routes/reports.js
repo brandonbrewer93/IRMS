@@ -4,7 +4,8 @@ const express = require("express"),
 
 
 router.get("/", function(req, res){
-  Report.find({}, function(err, allReports){
+  let org = req.user.organization.name;
+  Report.find({ "organization.name" : org }, function(err, allReports){
     if(err){
       console.log(err);
     } else {
@@ -18,14 +19,19 @@ router.get("/new", function(req, res){
 });
 
 router.post("/", function(req, res){
+  console.log(req.user);
   let description = req.body.description,
       address = req.body.address,
       type    = req.body.type;
 
   const newReport = {
     description: description,
-    address : address,
-    type : type,
+    address: address,
+    type: type,
+    organization: {
+        name: req.user.organization.name,
+        type: req.user.organization.type
+    },
     author: {
       id: req.user._id,
       name: req.user.firstName + " " + req.user.lastName
@@ -34,7 +40,7 @@ router.post("/", function(req, res){
 
   Report.create(newReport, function(err, createdReport){
     if(err){
-      console.log("ERROR");
+      console.log(err);
     } else {
       console.log("Successfully created new report..");
       res.redirect("/reports/" + createdReport._id);

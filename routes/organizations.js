@@ -3,7 +3,13 @@ const express       = require("express"),
       Organization  = require("../models/organization");
 
 router.get("/", function(req, res){
-  res.render("../views/organizations/index.ejs")
+  Organization.find({}, function(err, allOrganizations){
+    if(err){
+      console.log(err);
+    } else {
+        res.render("../views/organizations/index.ejs", {organizations: allOrganizations});
+    }
+  })
 });
 
 module.exports = router;

@@ -3,7 +3,8 @@ const express        = require("express"),
       mongoose       = require("mongoose"),
       bodyParser     = require("body-parser"),
       config         = require("./config"),
-      methodOverride = require("method-override");
+      methodOverride = require("method-override"),
+      seedDb         = require("./seedDB");
 
 // Passport 
 const passport      = require("passport"),
@@ -52,6 +53,8 @@ app.use("/", index);
 app.use("/users", userRoutes);
 app.use("/reports", reportRoutes);
 app.use("/organizations", organizationRoutes);
+
+// seedDb();
 
 app.listen(3000, function(){
     console.log("IRMS server running on port 3000...")

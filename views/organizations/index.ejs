@@ -1,3 +1,7 @@
 <% include ../partials/header%>
-<h1>ORG INDEX</h1>
+    <ul>
+        <% organizations.forEach(function(organization){ %>
+        <li><%= organization.name %></li>
+        <% }) %>
+    </ul>
 <% include ../partials/footer%>

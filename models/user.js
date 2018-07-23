@@ -1,10 +1,14 @@
 const mongoose              = require("mongoose"),
-      passportLocalMongoose = require("passport-local-mongoose");
+      passportLocalMongoose = require("passport-local-mongoose"),
+      Organization = require("../models/organization");
 
 const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
-    organization: String,
+    organization: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Organization"
+    },
     username: String,
     password: String
 });

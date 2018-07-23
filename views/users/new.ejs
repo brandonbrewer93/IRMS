@@ -22,7 +22,11 @@
             <div class="row mt-2">
                 <div class="col">
                     <label for="organization">Organization</label>
-                    <input type="text" name="organization" placeholder="Organization" class="form-control">
+                    <select name="organization" class="form-control">
+                        <% organizations.forEach(function(organization){ %>
+                            <option value="<%= organization.name %>"><%= organization.name %></option>
+                        <% }) %>
+                    </select>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary mt-3">Register</button>

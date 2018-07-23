@@ -1,7 +1,8 @@
 const express  = require("express"),
       router   = express.Router(),
       passport = require("passport"),
-      User     = require("../models/user");
+      User     = require("../models/user"),
+      Organization = require("../models/organization");
 
 router.get("/", function(req, res){
     User.find({}, function(err, allUsers){
@@ -14,31 +15,47 @@ router.get("/", function(req, res){
 });
 
 router.get("/new", function(req, res){
-  res.render("../views/users/new");
+    Organization.find({}, function(err, foundOrgs){
+      if(err){
+          console.log(err);
+      } else {
+          res.render("../views/users/new", { organizations: foundOrgs });
+      }
+    });
 });
 
 router.post("/", function(req, res){
   let firstName    = req.body.firstName,
       lastName     = req.body.lastName,
-      organization = req.body.organization,
       username     = req.body.username;
 
-  const newUser = {
-      firstName: firstName,
-      lastName: lastName,
-      organization: organization,
-      username: username
-    };
+  let organization;
 
-  User.register(newUser, req.body.password, function(err, user){
+  Organization.findOne({name : req.body.organization}, function(err, foundOrg){
       if(err){
           console.log(err)
       } else {
-          passport.authenticate("local")(req, res, function(){
-              res.redirect("/");
-          })
+          organization = foundOrg;
       }
-  })
+  }).then(function(){
+      const newUser = {
+          firstName: firstName,
+          lastName: lastName,
+          organization: organization._id,
+          username: username
+      };
+
+      User.register(new User(newUser), req.body.password, function(err, user){
+          if(err){
+              console.log(err);
+              res.redirect("/users/new");
+          } else {
+              passport.authenticate("local")(req, res, function(){
+                  res.redirect("/");
+              })
+          }
+      })
+  });
 });
 
 // show login form
