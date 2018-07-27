@@ -1,5 +1,5 @@
 <% include ../partials/header %>
-
+    <h2>All Reports For Your Organization</h2>
     <ul class="list-group mb-5">
     <% reports.forEach(function(report){ %>
       <li class="list-group-item"><a href="/reports/<%= report._id %>"><%= report.address %></a></li>

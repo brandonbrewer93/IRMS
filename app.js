@@ -1,10 +1,14 @@
+// Require packages
 const express        = require("express"),
       app            = express(),
       mongoose       = require("mongoose"),
       bodyParser     = require("body-parser"),
-      config         = require("./config"),
       methodOverride = require("method-override"),
+      path           = require('path'),
       seedDb         = require("./seedDB");
+
+// Require dotenv
+require('dotenv').config();
 
 // Passport 
 const passport      = require("passport"),
@@ -23,14 +27,18 @@ const organizationRoutes = require("./routes/organizations"),
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(config.connectionString, {
-    user: config.username,
-    pass: config.password
+// Connect to MongoDB
+mongoose.connect(process.env.CONNECTION_STRING, {
+    user: process.env.DB_USERNAME,
+    pass: process.env.DB_PASSWORD
 });
 
+// Use packages
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
+
+app.use(express.static(__dirname + '/public'));
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -49,6 +57,7 @@ app.use(function(req, res, next){
       next();
 });
 
+// Use routes
 app.use("/", index);
 app.use("/users", userRoutes);
 app.use("/reports", reportRoutes);

@@ -1,6 +1,7 @@
 <% include ../partials/header %>
 
-  <form action="/reports" method="POST" class="form-group">
+  <button class="btn btn-primary mb-5" id="showFormButton">Add New Report</button>
+  <form action="/reports" method="POST" class="form-group" id="reportForm" style="display:none">
     <div class="row">
         <div class="col">
             <label for="address">Address</label>

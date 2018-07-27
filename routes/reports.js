@@ -19,7 +19,6 @@ router.get("/new", function(req, res){
 });
 
 router.post("/", function(req, res){
-  console.log(req.body);
   let description = req.body.description,
       address = req.body.address,
       type    = req.body.type;
@@ -39,7 +38,6 @@ router.post("/", function(req, res){
     if(err){
       console.log(err);
     } else {
-      console.log("Successfully created new report..");
       res.redirect("/reports/" + createdReport._id);
     }
   })
