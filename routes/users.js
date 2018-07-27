@@ -4,6 +4,7 @@ const express  = require("express"),
       User     = require("../models/user"),
       Organization = require("../models/organization");
 
+// Show all users...no actual link to this in the project, you can still navigate here manually.
 router.get("/", function(req, res){
     User.find({}, function(err, allUsers){
         if(err){
@@ -14,6 +15,7 @@ router.get("/", function(req, res){
     });
 });
 
+// New user form
 router.get("/new", function(req, res){
     Organization.find({}, function(err, foundOrgs){
       if(err){
@@ -24,6 +26,7 @@ router.get("/new", function(req, res){
     });
 });
 
+// Add new user to db and redirect to home page
 router.post("/", function(req, res){
   let firstName    = req.body.firstName,
       lastName     = req.body.lastName,
@@ -63,6 +66,7 @@ router.get("/login", function(req, res){
     res.render("../views/users/login");
 });
 
+// login
 router.post("/login", passport.authenticate("local", 
     {
         successRedirect: "/",
@@ -70,6 +74,7 @@ router.post("/login", passport.authenticate("local",
     }), function(req, res){
 });
 
+// logout
 router.get("/logout", function(req, res){
     req.logout();
     res.redirect("/");

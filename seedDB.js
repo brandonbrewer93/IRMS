@@ -1,5 +1,6 @@
 const Organization = require("./models/organization");
 
+// Seed database with organizations. Eventually, users will add custom organizations.
 function seed(){
     Organization.create({name: "FCFD", type: "Fire Department"});
     Organization.create({name: "OFD", type: "Fire Department"});

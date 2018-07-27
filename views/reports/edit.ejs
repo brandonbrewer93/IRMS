@@ -2,12 +2,12 @@
 
 <form action="/reports/<%= report._id %>?_method=PUT" method="POST" class="form-group">
     <div class="row">
-        <div class="col">
+        <div class="col-sm-12 col-lg-6">
             <label for="address">Address</label>
             <input type="text" name="address" placeholder="Address" value="<%= report.address %>" class="form-control">
         </div>
-        <div class="col">
-            <label for="lastName">Type of incident</label>
+        <div class="col-sm-12 col-lg-6">
+            <label for="type">Type of incident</label>
             <input type="text" name="type" placeholder="Type of incident" value="<%= report.type %>" class="form-control">
         </div>
     </div>

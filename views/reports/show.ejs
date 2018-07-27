@@ -5,7 +5,7 @@
         <hr class="my-4">
         <p><%= report.description %></p>
         <a class="btn btn-sm btn-warning" href="/reports/<%= report._id %>/edit">Edit</a>
-        <form class="delete-form" action="/reports/<%= report._id %>?_method=DELETE" method="POST">
+        <form class="delete-form d-inline" action="/reports/<%= report._id %>?_method=DELETE" method="POST">
             <button class="btn btn-sm btn-danger">Delete</button>
         </form>
       </div>

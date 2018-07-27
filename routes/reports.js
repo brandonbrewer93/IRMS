@@ -1,8 +1,9 @@
+// Require express and report model
 const express = require("express"),
       router  = express.Router(),
       Report  = require("../models/report");
 
-
+//Get all reports for current users organization
 router.get("/", function(req, res){
   let orgId = req.user.organization._id;
   Report.find({ "organization" : orgId }, function(err, allReports){
@@ -14,10 +15,12 @@ router.get("/", function(req, res){
   });
 });
 
+// Show the new report page
 router.get("/new", function(req, res){
   res.render("../views/reports/new");
 });
 
+// Add new report to database, redirect to the report show page.
 router.post("/", function(req, res){
   let description = req.body.description,
       address = req.body.address,
@@ -43,6 +46,7 @@ router.post("/", function(req, res){
   })
 });
 
+// Show specific report
 router.get("/:id", function(req, res){
   Report.findById(req.params.id).exec(function(err, foundReport){
     if(err){
@@ -53,12 +57,14 @@ router.get("/:id", function(req, res){
   });
 });
 
+// Edit report
 router.get("/:id/edit", function(req, res){
   Report.findById(req.params.id, function(err, foundReport){
     res.render("reports/edit", {report: foundReport});
   });
 });
 
+// Save edits
 router.put("/:id", function(req, res){
   Report.findByIdAndUpdate(req.params.id, req.body, function(err, updatedReport){
       if (!err) {
@@ -70,6 +76,7 @@ router.put("/:id", function(req, res){
   });
 });
 
+// Delete report
 router.delete("/:id", function(req, res){
     Report.findByIdAndRemove(req.params.id, function(err){
         if (!err) {

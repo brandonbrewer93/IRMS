@@ -63,7 +63,7 @@ app.use("/users", userRoutes);
 app.use("/reports", reportRoutes);
 app.use("/organizations", organizationRoutes);
 
-// seedDb();
+seedDb();
 
 app.listen(3000, function(){
     console.log("IRMS server running on port 3000...")
